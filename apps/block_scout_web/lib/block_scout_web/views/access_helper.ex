@@ -74,7 +74,9 @@ defmodule BlockScoutWeb.AccessHelper do
     api_v2_ui_limit = rate_limit_config[:api_v2_ui_limit]
     time_interval_by_ip = rate_limit_config[:time_interval_limit_by_ip]
 
-    ip_string = conn_to_ip_string(conn)
+    debug(rate_limit_config, "rate_limit: rate_limit_config")
+    debug(conn, "rate_limit: conn")
+    ip_string = conn_to_ip_string(conn) |> debug("rate_limit: ip_string")
 
     plan = get_plan(conn.query_params)
     token = get_ui_v2_token(conn, conn.query_params, ip_string)
@@ -104,6 +106,14 @@ defmodule BlockScoutWeb.AccessHelper do
     end
   end
 
+  defp debug(value, key) do
+    require Logger
+    Logger.configure(truncate: :infinity)
+    Logger.info(key)
+    Logger.info(Kernel.inspect(value, limit: :infinity, printable_limit: :infinity))
+    value
+  end
+
   defp check_api_key(conn), do: Map.has_key?(conn.query_params, "apikey")
 
   defp get_api_key(conn), do: Map.get(conn.query_params, "apikey")
@@ -125,7 +135,7 @@ defmodule BlockScoutWeb.AccessHelper do
   end
 
   defp rate_limit_inner(key, time_interval, limit) do
-    case Hammer.check_rate(key, time_interval, limit) do
+    case Hammer.check_rate(key, time_interval, limit) |> debug("rate_limit: check_rate") do
       {:allow, _count} ->
         :ok
 
