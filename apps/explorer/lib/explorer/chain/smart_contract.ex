@@ -12,10 +12,12 @@ defmodule Explorer.Chain.SmartContract do
 
   use Explorer.Schema
 
+  import Explorer.SortingHelper
+
   alias Ecto.Changeset
   alias EthereumJSONRPC.Contract
   alias Explorer.Counters.AverageBlockTime
-  alias Explorer.{Chain, Repo}
+  alias Explorer.{Chain, Repo, PagingOptions}
   alias Explorer.Chain.{Address, ContractMethod, DecompiledSmartContract, Hash}
   alias Explorer.Chain.SmartContract.ExternalLibrary
   alias Explorer.SmartContract.Reader
@@ -23,6 +25,8 @@ defmodule Explorer.Chain.SmartContract do
 
   @burn_address_hash_str "0x0000000000000000000000000000000000000000"
   @burn_address_hash_str_32 "0x0000000000000000000000000000000000000000000000000000000000000000"
+
+  @default_sorting [{:asc, :fetched_coin_balance, :address}, desc: :id]
 
   @typep api? :: {:api?, true | false}
 
@@ -920,4 +924,52 @@ defmodule Explorer.Chain.SmartContract do
   end
 
   defp abi_decode_address_output(_), do: nil
+
+  def list_query(paging_options, sorting_options, filter, search_string) do
+    query = from(contract in __MODULE__, select: contract)
+
+    query
+    |> filter_contracts(filter)
+    |> search_contracts(search_string)
+    |> apply_sorting(sorting_options, @default_sorting)
+    |> page_verified_contracts_(paging_options, sorting_options)
+  end
+
+  defp search_contracts(basic_query, nil), do: basic_query
+
+  defp search_contracts(basic_query, search_string) do
+    from(contract in basic_query,
+      where:
+        ilike(contract.name, ^"%#{search_string}%") or
+          ilike(fragment("'0x' || encode(?, 'hex')", contract.address_hash), ^"%#{search_string}%")
+    )
+  end
+
+  defp filter_contracts(basic_query, :solidity) do
+    basic_query
+    |> where(is_vyper_contract: ^false)
+  end
+
+  defp filter_contracts(basic_query, :vyper) do
+    basic_query
+    |> where(is_vyper_contract: ^true)
+  end
+
+  defp filter_contracts(basic_query, :yul) do
+    from(query in basic_query, where: is_nil(query.abi))
+  end
+
+  defp filter_contracts(basic_query, _), do: basic_query
+
+  defp page_verified_contracts_(query, nil, _sorting), do: query
+  defp page_verified_contracts_(query, %PagingOptions{key: nil}, _sorting), do: query
+
+  defp page_verified_contracts_(query, %PagingOptions{key: key, page_size: page_size}, sorting) do
+    dynamic_where = page_with_sorting(sorting, @default_sorting)
+
+    from(smart_contract in query,
+      where: ^dynamic_where.(key),
+      limit: ^page_size
+    )
+  end
 end
