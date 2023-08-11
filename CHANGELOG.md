@@ -4,6 +4,7 @@
 
 ### Features
 
+- [#8180](https://github.com/blockscout/blockscout/pull/8180) - Deposits and Withdrawals for Polygon Supernets
 - [#8156](https://github.com/blockscout/blockscout/pull/8156) - Add `is_verified_via_admin_panel` property to tokens table
 - [#8165](https://github.com/blockscout/blockscout/pull/8165) - Add broadcast of updated address_current_token_balances
 - [#7952](https://github.com/blockscout/blockscout/pull/7952) - Add parsing constructor arguments for sourcify contracts
