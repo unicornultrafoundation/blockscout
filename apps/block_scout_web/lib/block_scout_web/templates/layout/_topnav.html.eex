@@ -29,11 +29,6 @@
               <%= gettext("Blockchain") %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarBlockchainDropdown">
-              <div class="nav-submenu">
-                <span>
-                  <%= gettext("Blocks") %>
-                </span>
-              </div>
               <%= link(
                     gettext("Blocks"),
                     to: blocks_path(@conn, :index),
