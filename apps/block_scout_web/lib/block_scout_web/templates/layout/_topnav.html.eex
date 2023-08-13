@@ -46,7 +46,6 @@
               <%= link(gettext("Verified contracts"),
                     to: verified_contracts_path(@conn, :index),
                     class: "dropdown-item border-bottom #{tab_status("reorgs", @conn.request_path)}")%>
-              <% end %>
             </div>
           </li>
           <li class="nav-item dropdown">
