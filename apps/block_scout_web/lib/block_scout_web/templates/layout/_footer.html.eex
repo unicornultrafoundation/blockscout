@@ -20,7 +20,9 @@
     <div class="row">
       <div class="col-xs-12 col-lg-3">
         <p class="footer-info-text">U2U Network Explorer. Powered by Blockscout</p>
-        
+      </div>
+
+      <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
         <h3>References</h3>
         <ul>
           <li><a href="https://uniultra.xyz/" rel="noreferrer" class="footer-link" target="_blank">Homepage</a></li>
