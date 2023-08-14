@@ -25,7 +25,7 @@
       <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
         <h3>References</h3>
         <ul>
-          <li><a href="https://uniultra.xyz/" rel="noreferrer" class="footer-link" target="_blank">Homepage</a></li>
+          <li><a href="https://uniultra.xyz/" rel="noreferrer" class="footer-link" target="_blank">Unicorn Ultra Homepage</a></li>
           <%= render BlockScoutWeb.LayoutView, "_add_chain_to_mm.html" %>
         </ul>
       </div>
