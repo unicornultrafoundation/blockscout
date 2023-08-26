@@ -23,7 +23,7 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
       insert(:token_balance, value_fetched_at: DateTime.utc_now())
 
       assert TokenBalance.init([], &[&1 | &2], nil) == [
-               {address_hash_bytes, token_contract_address_hash_bytes, 1000, "ERC-20", nil, 0}
+               {address_hash_bytes, token_contract_address_hash_bytes, 1000, "URC-20", nil, 0}
              ]
     end
   end
@@ -58,7 +58,7 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
       )
 
       assert TokenBalance.run(
-               [{address_hash_bytes, token_contract_address_hash_bytes, block_number, "ERC-20", nil, 0}],
+               [{address_hash_bytes, token_contract_address_hash_bytes, block_number, "URC-20", nil, 0}],
                nil
              ) == :ok
 
@@ -106,7 +106,7 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
       )
 
       assert TokenBalance.run(
-               [{address_hash_bytes, token_contract_address_hash_bytes, block_number, "ERC-20", nil, 0}],
+               [{address_hash_bytes, token_contract_address_hash_bytes, block_number, "URC-20", nil, 0}],
                nil
              ) == :ok
 
@@ -128,7 +128,7 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
         {
           token_balance_a.address_hash.bytes,
           token_balance_a.token_contract_address_hash.bytes,
-          "ERC-20",
+          "URC-20",
           nil,
           token_balance_a.block_number,
           # this token balance must be ignored
@@ -137,7 +137,7 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
         {
           token_balance_b.address_hash.bytes,
           token_balance_b.token_contract_address_hash.bytes,
-          "ERC-20",
+          "URC-20",
           nil,
           token_balance_b.block_number,
           # this token balance still have to be retried
@@ -172,8 +172,8 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
 
       assert TokenBalance.run(
                [
-                 {address_hash_bytes, token_contract_address_hash_bytes, block_number, "ERC-20", nil, 0},
-                 {address_hash_bytes, token_contract_address_hash_bytes, block_number, "ERC-20", nil, 0}
+                 {address_hash_bytes, token_contract_address_hash_bytes, block_number, "URC-20", nil, 0},
+                 {address_hash_bytes, token_contract_address_hash_bytes, block_number, "URC-20", nil, 0}
                ],
                nil
              ) == :ok
@@ -216,7 +216,7 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
           address_hash: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
           block_number: 19999,
           token_contract_address_hash: to_string(contract.contract_address_hash),
-          token_type: "ERC-20",
+          token_type: "URC-20",
           token_id: nil
         }
       ]
@@ -237,14 +237,14 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
           block_number: 19999,
           token_contract_address_hash: to_string(contract.contract_address_hash),
           token_id: nil,
-          token_type: "ERC-20"
+          token_type: "URC-20"
         },
         %{
           address_hash: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
           block_number: 19999,
           token_contract_address_hash: to_string(contract2.contract_address_hash),
           token_id: nil,
-          token_type: "ERC-20"
+          token_type: "URC-20"
         }
       ]
 
@@ -262,14 +262,14 @@ defmodule Indexer.Fetcher.TokenBalanceTest do
           block_number: 19999,
           token_contract_address_hash: to_string(contract.contract_address_hash),
           token_id: 11,
-          token_type: "ERC-20"
+          token_type: "URC-20"
         },
         %{
           address_hash: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
           block_number: 19999,
           token_contract_address_hash: to_string(contract2.contract_address_hash),
           token_id: 11,
-          token_type: "ERC-1155"
+          token_type: "URC-1155"
         }
       ]
 

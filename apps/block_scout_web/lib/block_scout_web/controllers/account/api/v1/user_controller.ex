@@ -84,16 +84,16 @@ defmodule BlockScoutWeb.Account.Api.V1.UserController do
             "incoming" => watch_coin_input,
             "outcoming" => watch_coin_output
           },
-          "ERC-20" => %{
+          "URC-20" => %{
             "incoming" => watch_erc_20_input,
             "outcoming" => watch_erc_20_output
           },
-          "ERC-721" => %{
+          "URC-721" => %{
             "incoming" => watch_erc_721_input,
             "outcoming" => watch_erc_721_output
           }
           # ,
-          # "ERC-1155" => %{
+          # "URC-1155" => %{
           #   "incoming" => watch_erc_1155_input,
           #   "outcoming" => watch_erc_1155_output
           # }
@@ -140,16 +140,16 @@ defmodule BlockScoutWeb.Account.Api.V1.UserController do
             "incoming" => watch_coin_input,
             "outcoming" => watch_coin_output
           },
-          "ERC-20" => %{
+          "URC-20" => %{
             "incoming" => watch_erc_20_input,
             "outcoming" => watch_erc_20_output
           },
-          "ERC-721" => %{
+          "URC-721" => %{
             "incoming" => watch_erc_721_input,
             "outcoming" => watch_erc_721_output
           }
           # ,
-          # "ERC-1155" => %{
+          # "URC-1155" => %{
           #   "incoming" => watch_erc_1155_input,
           #   "outcoming" => watch_erc_1155_output
           # }

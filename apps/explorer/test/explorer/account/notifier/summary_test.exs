@@ -84,7 +84,7 @@ defmodule Explorer.Account.Notifier.SummaryTest do
              ]
     end
 
-    test "ERC-20 Token transfer" do
+    test "URC-20 Token transfer" do
       tx =
         %Transaction{
           from_address: _from_address,
@@ -122,17 +122,17 @@ defmodule Explorer.Account.Notifier.SummaryTest do
                  from_address_hash: from_address.hash,
                  method: "transfer",
                  name: "Infinite Token",
-                 subject: "ERC-20",
+                 subject: "URC-20",
                  to_address_hash: to_address.hash,
                  transaction_hash: tx.hash,
                  tx_fee: fee,
-                 type: "ERC-20"
+                 type: "URC-20"
                }
              ]
     end
 
-    test "ERC-721 Token transfer" do
-      token = insert(:token, type: "ERC-721")
+    test "URC-721 Token transfer" do
+      token = insert(:token, type: "URC-721")
 
       tx =
         %Transaction{
@@ -172,13 +172,13 @@ defmodule Explorer.Account.Notifier.SummaryTest do
                  to_address_hash: to_address.hash,
                  transaction_hash: tx.hash,
                  tx_fee: fee,
-                 type: "ERC-721"
+                 type: "URC-721"
                }
              ]
     end
 
-    test "ERC-1155 single Token transfer" do
-      token = insert(:token, type: "ERC-1155")
+    test "URC-1155 single Token transfer" do
+      token = insert(:token, type: "URC-1155")
 
       tx =
         %Transaction{
@@ -218,13 +218,13 @@ defmodule Explorer.Account.Notifier.SummaryTest do
                  to_address_hash: to_address.hash,
                  transaction_hash: tx.hash,
                  tx_fee: fee,
-                 type: "ERC-1155"
+                 type: "URC-1155"
                }
              ]
     end
 
-    test "ERC-1155 multiple Token transfer" do
-      token = insert(:token, type: "ERC-1155")
+    test "URC-1155 multiple Token transfer" do
+      token = insert(:token, type: "URC-1155")
 
       tx =
         %Transaction{
@@ -264,7 +264,7 @@ defmodule Explorer.Account.Notifier.SummaryTest do
                  to_address_hash: to_address.hash,
                  transaction_hash: tx.hash,
                  tx_fee: fee,
-                 type: "ERC-1155"
+                 type: "URC-1155"
                }
              ]
     end

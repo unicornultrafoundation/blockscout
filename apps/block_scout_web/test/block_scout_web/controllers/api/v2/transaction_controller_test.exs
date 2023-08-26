@@ -225,7 +225,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
     end
 
     test "batch 1155 flattened", %{conn: conn} do
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx =
         :transaction
@@ -250,7 +250,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
     end
 
     test "single 1155 flattened", %{conn: conn} do
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx =
         :transaction
@@ -565,7 +565,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
         |> insert()
         |> with_block()
 
-      erc_1155_token = insert(:token, type: "ERC-1155")
+      erc_1155_token = insert(:token, type: "URC-1155")
 
       erc_1155_tt =
         for x <- 0..50 do
@@ -579,7 +579,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
         end
         |> Enum.reverse()
 
-      erc_721_token = insert(:token, type: "ERC-721")
+      erc_721_token = insert(:token, type: "URC-721")
 
       erc_721_tt =
         for x <- 0..50 do
@@ -593,7 +593,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
         end
         |> Enum.reverse()
 
-      erc_20_token = insert(:token, type: "ERC-20")
+      erc_20_token = insert(:token, type: "URC-20")
 
       erc_20_tt =
         for _ <- 0..50 do
@@ -607,7 +607,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
         |> Enum.reverse()
 
       # -- ERC-20 --
-      filter = %{"type" => "ERC-20"}
+      filter = %{"type" => "URC-20"}
       request = get(conn, "/api/v2/transactions/#{to_string(tx.hash)}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -624,7 +624,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
       # -- ------ --
 
       # -- ERC-721 --
-      filter = %{"type" => "ERC-721"}
+      filter = %{"type" => "URC-721"}
       request = get(conn, "/api/v2/transactions/#{to_string(tx.hash)}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -641,7 +641,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
       # -- ------ --
 
       # -- ERC-1155 --
-      filter = %{"type" => "ERC-1155"}
+      filter = %{"type" => "URC-1155"}
       request = get(conn, "/api/v2/transactions/#{to_string(tx.hash)}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -658,7 +658,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
       # -- ------ --
 
       # two filters simultaneously
-      filter = %{"type" => "ERC-1155,ERC-20"}
+      filter = %{"type" => "URC-1155,ERC-20"}
       request = get(conn, "/api/v2/transactions/#{to_string(tx.hash)}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -697,7 +697,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
     end
 
     test "check that same token_ids within batch squashes", %{conn: conn} do
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       id = 0
 
@@ -737,7 +737,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
     end
 
     test "check that pagination works for 721 tokens", %{conn: conn} do
-      token = insert(:token, type: "ERC-721")
+      token = insert(:token, type: "URC-721")
 
       tx =
         :transaction
@@ -767,7 +767,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
     end
 
     test "check that pagination works fine with 1155 batches #1 (large batch)", %{conn: conn} do
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx =
         :transaction
@@ -802,7 +802,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
 
     test "check that pagination works fine with 1155 batches #2 some batches on the first page and one on the second",
          %{conn: conn} do
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx =
         :transaction
@@ -861,7 +861,7 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
     end
 
     test "check that pagination works fine with 1155 batches #3", %{conn: conn} do
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx = insert(:transaction, input: "0xabcd010203040506") |> with_block()
 
@@ -1043,16 +1043,16 @@ defmodule BlockScoutWeb.API.V2.TransactionControllerTest do
   end
 
   # with the current implementation no transfers should come with list in totals
-  defp check_total(%Token{type: nft}, json, _token_transfer) when nft in ["ERC-721", "ERC-1155"] and is_list(json) do
+  defp check_total(%Token{type: nft}, json, _token_transfer) when nft in ["URC-721", "URC-1155"] and is_list(json) do
     false
   end
 
-  defp check_total(%Token{type: nft}, json, token_transfer) when nft in ["ERC-1155"] do
+  defp check_total(%Token{type: nft}, json, token_transfer) when nft in ["URC-1155"] do
     json["token_id"] in Enum.map(token_transfer.token_ids, fn x -> to_string(x) end) and
       json["value"] == to_string(token_transfer.amount)
   end
 
-  defp check_total(%Token{type: nft}, json, token_transfer) when nft in ["ERC-721"] do
+  defp check_total(%Token{type: nft}, json, token_transfer) when nft in ["URC-721"] do
     json["token_id"] in Enum.map(token_transfer.token_ids, fn x -> to_string(x) end)
   end
 

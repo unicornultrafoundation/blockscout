@@ -24,23 +24,23 @@ defmodule BlockScoutWeb.Tokens.Helper do
     do_token_transfer_amount(token, amount, nil, token_ids)
   end
 
-  defp do_token_transfer_amount(%Token{type: "ERC-20"}, nil, nil, _token_ids) do
+  defp do_token_transfer_amount(%Token{type: "URC-20"}, nil, nil, _token_ids) do
     {:ok, "--"}
   end
 
-  defp do_token_transfer_amount(%Token{type: "ERC-20", decimals: nil}, amount, _amounts, _token_ids) do
+  defp do_token_transfer_amount(%Token{type: "URC-20", decimals: nil}, amount, _amounts, _token_ids) do
     {:ok, CurrencyHelper.format_according_to_decimals(amount, Decimal.new(0))}
   end
 
-  defp do_token_transfer_amount(%Token{type: "ERC-20", decimals: decimals}, amount, _amounts, _token_ids) do
+  defp do_token_transfer_amount(%Token{type: "URC-20", decimals: decimals}, amount, _amounts, _token_ids) do
     {:ok, CurrencyHelper.format_according_to_decimals(amount, decimals)}
   end
 
-  defp do_token_transfer_amount(%Token{type: "ERC-721"}, _amount, _amounts, _token_ids) do
+  defp do_token_transfer_amount(%Token{type: "URC-721"}, _amount, _amounts, _token_ids) do
     {:ok, :erc721_instance}
   end
 
-  defp do_token_transfer_amount(%Token{type: "ERC-1155", decimals: decimals}, amount, amounts, token_ids) do
+  defp do_token_transfer_amount(%Token{type: "URC-1155", decimals: decimals}, amount, amounts, token_ids) do
     if amount do
       {:ok, :erc1155_instance, CurrencyHelper.format_according_to_decimals(amount, decimals)}
     else
@@ -65,12 +65,12 @@ defmodule BlockScoutWeb.Tokens.Helper do
     do_token_transfer_amount_for_api(token, amount, nil, token_ids)
   end
 
-  defp do_token_transfer_amount_for_api(%Token{type: "ERC-20"}, nil, nil, _token_ids) do
+  defp do_token_transfer_amount_for_api(%Token{type: "URC-20"}, nil, nil, _token_ids) do
     {:ok, nil}
   end
 
   defp do_token_transfer_amount_for_api(
-         %Token{type: "ERC-20", decimals: decimals},
+         %Token{type: "URC-20", decimals: decimals},
          amount,
          _amounts,
          _token_ids
@@ -78,12 +78,12 @@ defmodule BlockScoutWeb.Tokens.Helper do
     {:ok, amount, decimals}
   end
 
-  defp do_token_transfer_amount_for_api(%Token{type: "ERC-721"}, _amount, _amounts, _token_ids) do
+  defp do_token_transfer_amount_for_api(%Token{type: "URC-721"}, _amount, _amounts, _token_ids) do
     {:ok, :erc721_instance}
   end
 
   defp do_token_transfer_amount_for_api(
-         %Token{type: "ERC-1155", decimals: decimals},
+         %Token{type: "URC-1155", decimals: decimals},
          amount,
          amounts,
          token_ids

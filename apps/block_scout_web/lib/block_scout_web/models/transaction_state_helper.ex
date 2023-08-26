@@ -109,7 +109,7 @@ defmodule BlockScoutWeb.Models.TransactionStateHelper do
     token = token_transfer.token
 
     token_ids =
-      if token.type == "ERC-1155" do
+      if token.type == "URC-1155" do
         token_transfer.token_ids || [token_transfer.token_id]
       else
         [nil]

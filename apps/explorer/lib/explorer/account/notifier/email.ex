@@ -51,13 +51,13 @@ defmodule Explorer.Account.Notifier.Email do
       "COIN" ->
         amount
 
-      "ERC-20" ->
+      "URC-20" ->
         amount
 
-      "ERC-721" ->
+      "URC-721" ->
         "Token ID: " <> subject <> " of "
 
-      "ERC-1155" ->
+      "URC-1155" ->
         "Token ID: " <> subject <> " of "
     end
   end
