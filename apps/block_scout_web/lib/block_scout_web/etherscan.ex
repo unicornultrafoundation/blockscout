@@ -187,7 +187,7 @@ defmodule BlockScoutWeb.Etherscan do
         "name" => "Example Token",
         "decimals" => "18",
         "symbol" => "ET",
-        "type" => "ERC-20"
+        "type" => "URC-20"
       },
       %{
         "balance" => "1",
@@ -195,7 +195,7 @@ defmodule BlockScoutWeb.Etherscan do
         "name" => "Example ERC-721 Token",
         "decimals" => "18",
         "symbol" => "ET7",
-        "type" => "ERC-721"
+        "type" => "URC-721"
       }
     ]
   }
@@ -268,7 +268,7 @@ defmodule BlockScoutWeb.Etherscan do
       "name" => "Example Token",
       "symbol" => "ET",
       "totalSupply" => "1000000000",
-      "type" => "ERC-20"
+      "type" => "URC-20"
     }
   }
 
@@ -955,8 +955,8 @@ defmodule BlockScoutWeb.Etherscan do
       decimals: @token_decimal_type,
       type: %{
         type: "token type",
-        enum: ~s(["ERC-20", "ERC-721"]),
-        enum_interpretation: %{"ERC-20" => "ERC-20 token standard", "ERC-721" => "ERC-721 token standard"}
+        enum: ~s(["URC-20", "URC-721"]),
+        enum_interpretation: %{"URC-20" => "URC-20 token standard", "URC-721" => "URC-721 token standard"}
       },
       cataloged: %{
         type: "boolean",

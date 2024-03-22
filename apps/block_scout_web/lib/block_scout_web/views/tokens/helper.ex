@@ -31,17 +31,17 @@ defmodule BlockScoutWeb.Tokens.Helper do
   end
 
   # TODO: remove this clause along with token transfer denormalization
-  defp do_token_transfer_amount(%Token{type: type}, nil, nil, nil, _token_ids) when type in ["ERC-20", "ERC-404"] do
+  defp do_token_transfer_amount(%Token{type: type}, nil, nil, nil, _token_ids) when type in ["URC-20", "URC-404"] do
     {:ok, "--"}
   end
 
-  defp do_token_transfer_amount(_token, type, nil, nil, _token_ids) when type in ["ERC-20", "ERC-404"] do
+  defp do_token_transfer_amount(_token, type, nil, nil, _token_ids) when type in ["URC-20", "URC-404"] do
     {:ok, "--"}
   end
 
   # TODO: remove this clause along with token transfer denormalization
   defp do_token_transfer_amount(%Token{type: type, decimals: nil}, nil, amount, _amounts, _token_ids)
-       when type in ["ERC-20", "ERC-404"] do
+       when type in ["URC-20", "ERC-404"] do
     {:ok, CurrencyHelper.format_according_to_decimals(amount, Decimal.new(0))}
   end
 

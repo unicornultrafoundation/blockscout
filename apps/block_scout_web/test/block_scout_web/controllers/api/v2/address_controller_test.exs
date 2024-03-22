@@ -952,7 +952,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
     test "check token type filters", %{conn: conn} do
       address = insert(:address)
 
-      erc_20_token = insert(:token, type: "ERC-20")
+      erc_20_token = insert(:token, type: "URC-20")
 
       erc_20_tt =
         for _ <- 0..50 do
@@ -968,7 +968,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
           )
         end
 
-      erc_721_token = insert(:token, type: "ERC-721")
+      erc_721_token = insert(:token, type: "URC-721")
 
       erc_721_tt =
         for x <- 0..50 do
@@ -985,7 +985,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
           )
         end
 
-      erc_1155_token = insert(:token, type: "ERC-1155")
+      erc_1155_token = insert(:token, type: "URC-1155")
 
       erc_1155_tt =
         for x <- 0..50 do
@@ -1003,7 +1003,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
         end
 
       # -- ERC-20 --
-      filter = %{"type" => "ERC-20"}
+      filter = %{"type" => "URC-20"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1016,7 +1016,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
       # -- ------ --
 
       # -- ERC-721 --
-      filter = %{"type" => "ERC-721"}
+      filter = %{"type" => "URC-721"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1029,7 +1029,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
       # -- ------ --
 
       # -- ERC-1155 --
-      filter = %{"type" => "ERC-1155"}
+      filter = %{"type" => "URC-1155"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1042,7 +1042,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
       # -- ------ --
 
       # two filters simultaneously
-      filter = %{"type" => "ERC-1155,ERC-20"}
+      filter = %{"type" => "URC-1155,ERC-20"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1080,7 +1080,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
     test "type and direction filters at the same time", %{conn: conn} do
       address = insert(:address)
 
-      erc_20_token = insert(:token, type: "ERC-20")
+      erc_20_token = insert(:token, type: "URC-20")
 
       erc_20_tt =
         for _ <- 0..50 do
@@ -1096,7 +1096,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
           )
         end
 
-      erc_721_token = insert(:token, type: "ERC-721")
+      erc_721_token = insert(:token, type: "URC-721")
 
       erc_721_tt =
         for x <- 0..50 do
@@ -1113,13 +1113,13 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
           )
         end
 
-      filter = %{"type" => "ERC-721", "filter" => "from"}
+      filter = %{"type" => "URC-721", "filter" => "from"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
       assert response["items"] == []
       assert response["next_page_params"] == nil
 
-      filter = %{"type" => "ERC-721", "filter" => "to"}
+      filter = %{"type" => "URC-721", "filter" => "to"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1130,7 +1130,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
 
       check_paginated_response(response, response_2nd_page, erc_721_tt)
 
-      filter = %{"type" => "ERC-721,ERC-20", "filter" => "to"}
+      filter = %{"type" => "URC-721,ERC-20", "filter" => "to"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1141,7 +1141,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
 
       check_paginated_response(response, response_2nd_page, erc_721_tt)
 
-      filter = %{"type" => "ERC-721,ERC-20", "filter" => "from"}
+      filter = %{"type" => "URC-721,ERC-20", "filter" => "from"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
 
@@ -1156,7 +1156,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
     test "check that same token_ids within batch squashes", %{conn: conn} do
       address = insert(:address)
 
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       id = 0
 
@@ -1196,7 +1196,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
     test "check that pagination works for 721 tokens", %{conn: conn} do
       address = insert(:address)
 
-      token = insert(:token, type: "ERC-721")
+      token = insert(:token, type: "URC-721")
 
       token_transfers =
         for i <- 0..50 do
@@ -1226,7 +1226,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
     test "check that pagination works fine with 1155 batches #1 (large batch) + check filters", %{conn: conn} do
       address = insert(:address)
 
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
       tx = insert(:transaction, input: "0xabcd010203040506") |> with_block()
 
       tt =
@@ -1246,7 +1246,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
           %TokenTransfer{tt | token_ids: [i], amount: i}
         end
 
-      filter = %{"type" => "ERC-1155", "filter" => "to"}
+      filter = %{"type" => "URC-1155", "filter" => "to"}
 
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert response = json_response(request, 200)
@@ -1258,7 +1258,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
 
       check_paginated_response(response, response_2nd_page, token_transfers)
 
-      filter = %{"type" => "ERC-1155", "filter" => "from"}
+      filter = %{"type" => "URC-1155", "filter" => "from"}
 
       request = get(conn, "/api/v2/addresses/#{address.hash}/token-transfers", filter)
       assert %{"items" => [], "next_page_params" => nil} = json_response(request, 200)
@@ -1268,7 +1268,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
          %{conn: conn} do
       address = insert(:address)
 
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx_1 = insert(:transaction, input: "0xabcd010203040506") |> with_block()
 
@@ -1333,7 +1333,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
     test "check that pagination works fine with 1155 batches #3", %{conn: conn} do
       address = insert(:address)
 
-      token = insert(:token, type: "ERC-1155")
+      token = insert(:token, type: "URC-1155")
 
       tx_1 = insert(:transaction, input: "0xabcd010203040506") |> with_block()
 
@@ -1821,7 +1821,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
         for _ <- 0..50 do
           insert(:address_current_token_balance_with_token_id_and_fixed_token_type,
             address: address,
-            token_type: "ERC-20",
+            token_type: "URC-20",
             token_id: nil
           )
           |> Repo.preload([:token])
@@ -1830,11 +1830,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
 
       ctbs_erc_721 =
         for _ <- 0..50 do
-          insert(:address_current_token_balance_with_token_id_and_fixed_token_type,
-            address: address,
-            token_type: "ERC-721",
-            token_id: nil
-          )
+          insert(:address_current_token_balance_with_token_id, address: address, token_type: "ERC-721", token_id: nil)
           |> Repo.preload([:token])
         end
         |> Enum.sort_by(fn x -> Decimal.to_integer(x.value) end, :asc)
@@ -1843,14 +1839,14 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
         for _ <- 0..50 do
           insert(:address_current_token_balance_with_token_id_and_fixed_token_type,
             address: address,
-            token_type: "ERC-1155",
+            token_type: "URC-1155",
             token_id: Enum.random(1..100_000)
           )
           |> Repo.preload([:token])
         end
         |> Enum.sort_by(fn x -> Decimal.to_integer(x.value) end, :asc)
 
-      filter = %{"type" => "ERC-20"}
+      filter = %{"type" => "URC-20"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/tokens", filter)
       assert response = json_response(request, 200)
 
@@ -1861,7 +1857,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
 
       check_paginated_response(response, response_2nd_page, ctbs_erc_20)
 
-      filter = %{"type" => "ERC-721"}
+      filter = %{"type" => "URC-721"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/tokens", filter)
       assert response = json_response(request, 200)
 
@@ -1872,7 +1868,7 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
 
       check_paginated_response(response, response_2nd_page, ctbs_erc_721)
 
-      filter = %{"type" => "ERC-1155"}
+      filter = %{"type" => "URC-1155"}
       request = get(conn, "/api/v2/addresses/#{address.hash}/tokens", filter)
       assert response = json_response(request, 200)
 
@@ -3211,16 +3207,16 @@ defmodule BlockScoutWeb.API.V2.AddressControllerTest do
   end
 
   # with the current implementation no transfers should come with list in totals
-  def check_total(%Token{type: nft}, json, _token_transfer) when nft in ["ERC-721", "ERC-1155"] and is_list(json) do
+  def check_total(%Token{type: nft}, json, _token_transfer) when nft in ["URC-721", "URC-1155"] and is_list(json) do
     false
   end
 
-  def check_total(%Token{type: nft}, json, token_transfer) when nft in ["ERC-1155"] do
+  def check_total(%Token{type: nft}, json, token_transfer) when nft in ["URC-1155"] do
     json["token_id"] in Enum.map(token_transfer.token_ids, fn x -> to_string(x) end) and
       json["value"] == to_string(token_transfer.amount)
   end
 
-  def check_total(%Token{type: nft}, json, token_transfer) when nft in ["ERC-721"] do
+  def check_total(%Token{type: nft}, json, token_transfer) when nft in ["URC-721"] do
     json["token_id"] in Enum.map(token_transfer.token_ids, fn x -> to_string(x) end)
   end
 

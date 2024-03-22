@@ -172,7 +172,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_1,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_1,
-                     token_type: "ERC-1155"
+                     token_type: "URC-1155"
                    },
                    %{
                      address_hash: address_hash,
@@ -181,7 +181,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_2,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_2,
-                     token_type: "ERC-1155"
+                     token_type: "URC-1155"
                    },
                    %{
                      address_hash: address_hash,
@@ -190,7 +190,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_3,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_3,
-                     token_type: "ERC-20"
+                     token_type: "URC-20"
                    },
                    %{
                      address_hash: address_hash,
@@ -199,7 +199,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_4,
                      value_fetched_at: DateTime.add(DateTime.utc_now(), -1),
                      token_id: token_id_4,
-                     token_type: "ERC-721"
+                     token_type: "URC-721"
                    },
                    %{
                      address_hash: address_hash,
@@ -208,7 +208,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_5,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_5,
-                     token_type: "ERC-721"
+                     token_type: "URC-721"
                    },
                    %{
                      address_hash: address_hash,
@@ -217,7 +217,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_6,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_6,
-                     token_type: "ERC-404"
+                     token_type: "URC-404"
                    },
                    %{
                      address_hash: address_hash,
@@ -226,7 +226,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_7,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: nil,
-                     token_type: "ERC-404"
+                     token_type: "URC-404"
                    }
                  ],
                  options

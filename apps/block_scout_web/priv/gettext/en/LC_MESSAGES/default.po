@@ -339,6 +339,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: lib/block_scout_web/templates/layout/_topnav.html.eex:55
+#, elixir-autogen, elixir-format
+msgid "URC"
+msgstr ""
+
 #: lib/block_scout_web/templates/smart_contract/_functions.html.eex:13
 #, elixir-autogen, elixir-format
 msgid "All functions displayed below are from ABI of that contract. In order to verify current contract, proceed with"
@@ -1174,27 +1179,27 @@ msgstr ""
 
 #: lib/block_scout_web/views/transaction_view.ex:225
 #, elixir-autogen, elixir-format
-msgid "ERC-1155 "
+msgid "URC-1155 "
 msgstr ""
 
 #: lib/block_scout_web/views/transaction_view.ex:223
 #, elixir-autogen, elixir-format
-msgid "ERC-20 "
+msgid "URC-20 "
 msgstr ""
 
 #: lib/block_scout_web/templates/account/watchlist_address/form.html.eex:40
 #, elixir-autogen, elixir-format
-msgid "ERC-20 tokens (beta)"
+msgid "URC-20 tokens (beta)"
 msgstr ""
 
 #: lib/block_scout_web/views/transaction_view.ex:224
 #, elixir-autogen, elixir-format
-msgid "ERC-721 "
+msgid "URC-721 "
 msgstr ""
 
 #: lib/block_scout_web/templates/account/watchlist_address/form.html.eex:53
 #, elixir-autogen, elixir-format
-msgid "ERC-721, ERC-1155 tokens (NFT) (beta)"
+msgid "URC-721, URC-1155 tokens (NFT) (beta)"
 msgstr ""
 
 #: lib/block_scout_web/templates/api_docs/eth_rpc.html.eex:4
@@ -1638,7 +1643,7 @@ msgstr ""
 
 #: lib/block_scout_web/templates/transaction/overview.html.eex:351
 #, elixir-autogen, elixir-format
-msgid "List of ERC-1155 tokens created in the transaction."
+msgid "List of URC-1155 tokens created in the transaction."
 msgstr ""
 
 #: lib/block_scout_web/templates/transaction/overview.html.eex:335
@@ -2363,7 +2368,7 @@ msgstr ""
 
 #: lib/block_scout_web/templates/address_token/overview.html.eex:59
 #, elixir-autogen, elixir-format
-msgid "Shows the tokens held in the address (includes ERC-20, ERC-721 and ERC-1155)."
+msgid "Shows the tokens held in the address (includes URC-20, URC-721 and URC-1155)."
 msgstr ""
 
 #: lib/block_scout_web/templates/address_token/overview.html.eex:66
