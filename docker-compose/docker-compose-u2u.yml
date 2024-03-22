@@ -11,7 +11,7 @@ services:
       file: ./services/docker-compose-db.yml
       service: db
 
-  blockscout:
+  backend:
     depends_on:
       - db
       - smart-contract-verifier
@@ -40,9 +40,13 @@ services:
     env_file:
       -  ./envs/u2u.env
     ports:
-      - 80:4000
+      - 4000:4000
     volumes:
       - ./logs/:/app/logs/
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 300m
 
   smart-contract-verifier:
     extends:
@@ -58,3 +62,25 @@ services:
     extends:
       file: ./services/docker-compose-sig-provider.yml
       service: sig-provider
+  
+  stats-db:
+    depends_on:
+      - backend
+    extends:
+      file: ./services/docker-compose-stats.yml
+      service: stats-db
+
+  stats:
+    depends_on:
+      - stats-db
+    extends:
+      file: ./services/docker-compose-stats.yml
+      service: stats
+
+  proxy:
+    depends_on:
+      - backend
+      - stats
+    extends:
+      file: ./services/docker-compose-nginx.yml
+      service: proxy
