@@ -23,8 +23,8 @@ services:
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     env_file:
-      -  ./envs/u2u.env
+      -  ../envs/u2u.env
     ports:
       - 80:4000
     volumes:
-      - ./logs/:/app/logs/
+      - ../logs/:/app/logs/
