@@ -25,6 +25,6 @@ services:
     env_file:
       -  ../envs/u2u.env
     ports:
-      - 80:4000
+      - 4000:4000
     volumes:
       - ../logs/:/app/logs/
