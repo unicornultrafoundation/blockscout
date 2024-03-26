@@ -19,13 +19,7 @@ services:
     extends:
       file: ./services/backend.yml
       service: backend
-    volumes:
-      - ./logs/:/app/logs/
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 300m
-      
+   
   smart-contract-verifier:
     extends:
       file: ./services/docker-compose-smart-contract-verifier.yml
