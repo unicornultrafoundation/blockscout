@@ -16,6 +16,9 @@ services:
       - db
       - smart-contract-verifier
       - redis_db
+    extends:
+      file: ./services/backend.yml
+      service: backend
     build:
       context: ..
       dockerfile: ./docker/Dockerfile
@@ -28,9 +31,7 @@ services:
         CACHE_ADDRESS_WITH_BALANCES_UPDATE_INTERVAL: ""
         ADMIN_PANEL_ENABLED: ""
         RELEASE_VERSION: 6.3.3
-    extends:
-      file: ./services/backend.yml
-      service: backend
+   
     logging:
       driver: "json-file"
       options:
