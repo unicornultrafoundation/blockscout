@@ -1179,28 +1179,31 @@ msgstr ""
 
 #: lib/block_scout_web/views/transaction_view.ex:225
 #, elixir-autogen, elixir-format
-msgid "URC-1155 "
-msgstr ""
+msgid "ERC-1155"
+msgstr "URC-1155"
+
+msgid "ERC-404 "
+msgstr "URC-404"
 
 #: lib/block_scout_web/views/transaction_view.ex:223
 #, elixir-autogen, elixir-format
-msgid "URC-20 "
-msgstr ""
+msgid "ERC-20 "
+msgstr "URC-20"
 
 #: lib/block_scout_web/templates/account/watchlist_address/form.html.eex:40
 #, elixir-autogen, elixir-format
-msgid "URC-20 tokens (beta)"
-msgstr ""
+msgid "ERC-20 tokens (beta)"
+msgstr "URC-20 tokens (beta)"
 
 #: lib/block_scout_web/views/transaction_view.ex:224
 #, elixir-autogen, elixir-format
-msgid "URC-721 "
-msgstr ""
+msgid "ERC-721 "
+msgstr "URC-721"
 
 #: lib/block_scout_web/templates/account/watchlist_address/form.html.eex:53
 #, elixir-autogen, elixir-format
-msgid "URC-721, URC-1155 tokens (NFT) (beta)"
-msgstr ""
+msgid "ERC-721, ERC-1155 tokens (NFT) (beta)"
+msgstr "URC-721, URC-1155 tokens (NFT) (beta)"
 
 #: lib/block_scout_web/templates/api_docs/eth_rpc.html.eex:4
 #, elixir-autogen, elixir-format
@@ -1643,8 +1646,8 @@ msgstr ""
 
 #: lib/block_scout_web/templates/transaction/overview.html.eex:351
 #, elixir-autogen, elixir-format
-msgid "List of URC-1155 tokens created in the transaction."
-msgstr ""
+msgid "List of ERC-1155 tokens created in the transaction."
+msgstr "List of URC-1155 tokens created in the transaction."
 
 #: lib/block_scout_web/templates/transaction/overview.html.eex:335
 #, elixir-autogen, elixir-format
@@ -2368,8 +2371,8 @@ msgstr ""
 
 #: lib/block_scout_web/templates/address_token/overview.html.eex:59
 #, elixir-autogen, elixir-format
-msgid "Shows the tokens held in the address (includes URC-20, URC-721 and URC-1155)."
-msgstr ""
+msgid "Shows the tokens held in the address (includes ERC-20, ERC-721 and ERC-1155)."
+msgstr "Shows the tokens held in the address (includes URC-20, URC-721 and URC-1155)."
 
 #: lib/block_scout_web/templates/address_token/overview.html.eex:66
 #, elixir-autogen, elixir-format

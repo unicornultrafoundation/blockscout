@@ -42,9 +42,9 @@ defmodule BlockScoutWeb.Tokens.OverviewView do
   defp tab_name(["read-contract"]), do: gettext("Read Contract")
   defp tab_name(["inventory"]), do: gettext("Inventory")
 
-  def display_inventory?(%Token{type: "URC-721"}), do: true
-  def display_inventory?(%Token{type: "URC-1155"}), do: true
-  def display_inventory?(%Token{type: "URC-404"}), do: true
+  def display_inventory?(%Token{type: "ERC-721"}), do: true
+  def display_inventory?(%Token{type: "ERC-1155"}), do: true
+  def display_inventory?(%Token{type: "ERC-404"}), do: true
 
   def display_inventory?(_), do: false
 

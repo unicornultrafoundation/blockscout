@@ -480,11 +480,11 @@ content-type: multipart/mixed; boundary=plug_conn_test
       "outcoming": false,
       "incoming": true
     },
-    "URC-721": {
+    "ERC-721": {
       "outcoming": false,
       "incoming": true
     },
-    "URC-20": {
+    "ERC-20": {
       "outcoming": false,
       "incoming": false
     }
@@ -517,11 +517,11 @@ access-control-expose-headers:
       "outcoming": false,
       "incoming": true
     },
-    "URC-721": {
+    "ERC-721": {
       "outcoming": false,
       "incoming": true
     },
-    "URC-20": {
+    "ERC-20": {
       "outcoming": false,
       "incoming": false
     }
@@ -565,11 +565,11 @@ access-control-expose-headers:
         "outcoming": false,
         "incoming": false
       },
-      "URC-721": {
+      "ERC-721": {
         "outcoming": true,
         "incoming": false
       },
-      "URC-20": {
+      "ERC-20": {
         "outcoming": true,
         "incoming": false
       }
@@ -589,11 +589,11 @@ access-control-expose-headers:
         "outcoming": false,
         "incoming": true
       },
-      "URC-721": {
+      "ERC-721": {
         "outcoming": false,
         "incoming": true
       },
-      "URC-20": {
+      "ERC-20": {
         "outcoming": false,
         "incoming": false
       }
@@ -654,11 +654,11 @@ content-type: multipart/mixed; boundary=plug_conn_test
       "outcoming": false,
       "incoming": true
     },
-    "URC-721": {
+    "ERC-721": {
       "outcoming": true,
       "incoming": true
     },
-    "URC-20": {
+    "ERC-20": {
       "outcoming": true,
       "incoming": true
     }
@@ -691,11 +691,11 @@ access-control-expose-headers:
       "outcoming": false,
       "incoming": true
     },
-    "URC-721": {
+    "ERC-721": {
       "outcoming": true,
       "incoming": true
     },
-    "URC-20": {
+    "ERC-20": {
       "outcoming": true,
       "incoming": true
     }
@@ -729,11 +729,11 @@ content-type: multipart/mixed; boundary=plug_conn_test
       "outcoming": false,
       "incoming": true
     },
-    "URC-721": {
+    "ERC-721": {
       "outcoming": false,
       "incoming": false
     },
-    "URC-20": {
+    "ERC-20": {
       "outcoming": true,
       "incoming": false
     }
@@ -787,11 +787,11 @@ content-type: multipart/mixed; boundary=plug_conn_test
       "outcoming": false,
       "incoming": true
     },
-    "URC-721": {
+    "ERC-721": {
       "outcoming": false,
       "incoming": false
     },
-    "URC-20": {
+    "ERC-20": {
       "outcoming": true,
       "incoming": false
     }

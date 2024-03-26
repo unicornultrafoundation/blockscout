@@ -20,7 +20,7 @@ defmodule Explorer.Chain.Address.TokenBalanceTest do
 
     test "does not ignore token balance when the address isn't the burn address with Token ERC-20" do
       address = insert(:address, hash: "0xc45e4830dff873cf8b70de2b194d0ddd06ef651e")
-      token = insert(:token, type: "URC-20")
+      token = insert(:token, type: "ERC-20")
 
       token_balance =
         insert(
@@ -40,7 +40,7 @@ defmodule Explorer.Chain.Address.TokenBalanceTest do
 
     test "ignores the burn_address when the token type is ERC-721" do
       burn_address = insert(:address, hash: "0x0000000000000000000000000000000000000000")
-      token = insert(:token, type: "URC-721")
+      token = insert(:token, type: "ERC-721")
 
       insert(
         :token_balance,
@@ -59,7 +59,7 @@ defmodule Explorer.Chain.Address.TokenBalanceTest do
 
     test "does not ignore the burn_address when the token type is ERC-20" do
       burn_address = insert(:address, hash: "0x0000000000000000000000000000000000000000")
-      token = insert(:token, type: "URC-20")
+      token = insert(:token, type: "ERC-20")
 
       token_balance =
         insert(

@@ -99,7 +99,7 @@ defmodule Indexer.Fetcher.TokenBalanceOnDemand do
           )
 
         result =
-          if stale_current_token_balance.token_type == "URC-1155" do
+          if stale_current_token_balance.token_type == "ERC-1155" do
             Map.put(acc, :erc_1155, [prepared_ctb | acc[:erc_1155]])
           else
             Map.put(acc, :other, [prepared_ctb | acc[:other]])
@@ -209,14 +209,14 @@ defmodule Indexer.Fetcher.TokenBalanceOnDemand do
 
     balance_response =
       case token_type do
-        "URC-404" ->
+        "ERC-404" ->
           if token_id do
             BalanceReader.get_balances_of_erc_1155([request])
           else
             BalanceReader.get_balances_of([request])
           end
 
-        "URC-1155" ->
+        "ERC-1155" ->
           BalanceReader.get_balances_of_erc_1155([request])
 
         _ ->

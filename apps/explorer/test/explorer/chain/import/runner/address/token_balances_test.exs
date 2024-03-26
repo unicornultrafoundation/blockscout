@@ -31,7 +31,7 @@ defmodule Explorer.Chain.Import.Runner.Address.TokenBalancesTest do
         value: value,
         value_fetched_at: value_fetched_at,
         token_id: 11,
-        token_type: "URC-20"
+        token_type: "ERC-20"
       }
 
       assert {:ok,
@@ -74,7 +74,7 @@ defmodule Explorer.Chain.Import.Runner.Address.TokenBalancesTest do
         value: nil,
         value_fetched_at: value_fetched_at,
         token_id: nil,
-        token_type: "URC-20"
+        token_type: "ERC-20"
       }
 
       assert {:ok,
@@ -128,7 +128,7 @@ defmodule Explorer.Chain.Import.Runner.Address.TokenBalancesTest do
       value: nil,
       value_fetched_at: value_fetched_at,
       token_id: 11,
-      token_type: "URC-1155"
+      token_type: "ERC-1155"
     }
 
     assert {:ok,
@@ -177,7 +177,7 @@ defmodule Explorer.Chain.Import.Runner.Address.TokenBalancesTest do
       block_number: block_number,
       token_contract_address_hash: token_contract_address_hash,
       token_id: 11,
-      token_type: "URC-721",
+      token_type: "ERC-721",
       value: value,
       value_fetched_at: value_fetched_at
     }
@@ -201,7 +201,7 @@ defmodule Explorer.Chain.Import.Runner.Address.TokenBalancesTest do
       block_number: block_number,
       token_contract_address_hash: token_contract_address_hash,
       token_id: 12,
-      token_type: "URC-721"
+      token_type: "ERC-721"
     }
 
     assert {:ok,

@@ -23,7 +23,7 @@ defmodule Explorer.Chain.Address.TokenBalance do
    *  `token_contract_address_hash` - The contract address hash foreign key.
    *  `block_number` - The block's number that the transfer took place.
    *  `value` - The value that's represents the balance.
-   *  `token_id` - The token_id of the transferred token (applicable for URC-1155, URC-721 and URC-404 tokens)
+   *  `token_id` - The token_id of the transferred token (applicable for ERC-1155, ERC-721 and ERC-404 tokens)
    *  `token_type` - The type of the token
   """
   typed_schema "address_token_balances" do
@@ -66,7 +66,7 @@ defmodule Explorer.Chain.Address.TokenBalance do
   Builds an `Ecto.Query` to fetch the unfetched token balances.
 
   Unfetched token balances are the ones that have the column `value_fetched_at` nil or the value is null. This query also
-  ignores the burn_address for tokens URC-721 since the most tokens URC-721 don't allow get the
+  ignores the burn_address for tokens ERC-721 since the most tokens ERC-721 don't allow get the
   balance for burn_address.
   """
   # credo:disable-for-next-line /Complexity/
@@ -75,8 +75,8 @@ defmodule Explorer.Chain.Address.TokenBalance do
       from(
         tb in TokenBalance,
         where:
-          ((tb.address_hash != ^@burn_address_hash and tb.token_type == "URC-721") or tb.token_type == "URC-20" or
-             tb.token_type == "URC-1155" or tb.token_type == "URC-404") and
+          ((tb.address_hash != ^@burn_address_hash and tb.token_type == "ERC-721") or tb.token_type == "ERC-20" or
+             tb.token_type == "ERC-1155" or tb.token_type == "ERC-404") and
             (is_nil(tb.value_fetched_at) or is_nil(tb.value))
       )
     else
@@ -85,8 +85,8 @@ defmodule Explorer.Chain.Address.TokenBalance do
         join: t in Token,
         on: tb.token_contract_address_hash == t.contract_address_hash,
         where:
-          ((tb.address_hash != ^@burn_address_hash and t.type == "URC-721") or t.type == "URC-20" or
-             t.type == "URC-1155" or t.type == "URC-404") and
+          ((tb.address_hash != ^@burn_address_hash and t.type == "ERC-721") or t.type == "ERC-20" or
+             t.type == "ERC-1155" or t.type == "ERC-404") and
             (is_nil(tb.value_fetched_at) or is_nil(tb.value))
       )
     end

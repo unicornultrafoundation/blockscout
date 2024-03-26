@@ -33,7 +33,7 @@ defmodule Indexer.TokenBalancesTest do
         address_hash: address_hash_string,
         block_number: 1_000,
         token_id: 11,
-        token_type: "URC-20"
+        token_type: "ERC-20"
       }
 
       get_balance_from_blockchain()
@@ -66,7 +66,7 @@ defmodule Indexer.TokenBalancesTest do
           address_hash: address_hash_string,
           block_number: 1_000,
           token_id: 5,
-          token_type: "URC-1155"
+          token_type: "ERC-1155"
         }
       ]
 
@@ -175,49 +175,49 @@ defmodule Indexer.TokenBalancesTest do
           address_hash: address_1_hash_string,
           block_number: 1_000,
           token_id: nil,
-          token_type: "URC-20"
+          token_type: "ERC-20"
         },
         %{
           token_contract_address_hash: Hash.to_string(token_2.contract_address_hash),
           address_hash: address_2_hash_string,
           block_number: 1_000,
           token_id: nil,
-          token_type: "URC-20"
+          token_type: "ERC-20"
         },
         %{
           token_contract_address_hash: Hash.to_string(token_3.contract_address_hash),
           address_hash: address_2_hash_string,
           block_number: 1_000,
           token_id: 42,
-          token_type: "URC-721"
+          token_type: "ERC-721"
         },
         %{
           token_contract_address_hash: Hash.to_string(token_4.contract_address_hash),
           address_hash: address_2_hash_string,
           block_number: 1_000,
           token_id: 5,
-          token_type: "URC-1155"
+          token_type: "ERC-1155"
         },
         %{
           token_contract_address_hash: Hash.to_string(token_2.contract_address_hash),
           address_hash: Hash.to_string(token_2.contract_address_hash),
           block_number: 1_000,
           token_id: nil,
-          token_type: "URC-20"
+          token_type: "ERC-20"
         },
         %{
           token_contract_address_hash: Hash.to_string(token_2.contract_address_hash),
           address_hash: address_3_hash_string,
           block_number: 1_000,
           token_id: nil,
-          token_type: "URC-20"
+          token_type: "ERC-20"
         },
         %{
           token_contract_address_hash: Hash.to_string(token_2.contract_address_hash),
           address_hash: Hash.to_string(token_2.contract_address_hash),
           block_number: 1_000,
           token_id: nil,
-          token_type: "URC-20"
+          token_type: "ERC-20"
         }
       ]
 
@@ -293,7 +293,7 @@ defmodule Indexer.TokenBalancesTest do
           token_contract_address_hash: to_string(token.contract_address_hash),
           retries_count: 1,
           token_id: 11,
-          token_type: "URC-20"
+          token_type: "ERC-20"
         }
       ]
 
@@ -310,7 +310,7 @@ defmodule Indexer.TokenBalancesTest do
                       retries_count: 1,
                       token_contract_address_hash: to_string(token.contract_address_hash),
                       token_id: 11,
-                      token_type: "URC-20",
+                      token_type: "ERC-20",
                       value: nil,
                       value_fetched_at: nil
                     }

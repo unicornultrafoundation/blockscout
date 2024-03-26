@@ -2216,7 +2216,7 @@ defmodule BlockScoutWeb.API.RPC.AddressControllerTest do
         |> with_block()
 
       token_address = insert(:contract_address)
-      insert(:token, %{contract_address: token_address, type: "URC-721"})
+      insert(:token, %{contract_address: token_address, type: "ERC-721"})
 
       token_transfer =
         insert(:token_transfer, %{

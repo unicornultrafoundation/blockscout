@@ -105,11 +105,11 @@ defmodule BlockScoutWeb.Account.Api.V1.UserView do
           "incoming" => watchlist.watch_coin_input,
           "outcoming" => watchlist.watch_coin_output
         },
-        "URC-20" => %{
+        "ERC-20" => %{
           "incoming" => watchlist.watch_erc_20_input,
           "outcoming" => watchlist.watch_erc_20_output
         },
-        "URC-721" => %{
+        "ERC-721" => %{
           "incoming" => watchlist.watch_erc_721_input,
           "outcoming" => watchlist.watch_erc_721_output
         },
@@ -117,7 +117,7 @@ defmodule BlockScoutWeb.Account.Api.V1.UserView do
         #   "incoming" => watchlist.watch_erc_1155_input,
         #   "outcoming" => watchlist.watch_erc_1155_output
         # },
-        "URC-404" => %{
+        "ERC-404" => %{
           "incoming" => watchlist.watch_erc_404_input,
           "outcoming" => watchlist.watch_erc_404_output
         }
