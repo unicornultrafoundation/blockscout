@@ -4563,7 +4563,7 @@ defmodule Explorer.Chain do
 
       %Token{} = token ->
         {:ok, token}
-    end
+      end
     base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
 
     token
@@ -4573,6 +4573,7 @@ defmodule Explorer.Chain do
            Map.put(token, icon_url, base_icon_url)
          {:ok, nil} ->
            token = %{token | icon_url: base_icon_url}
+       end
     token
   end
 
