@@ -34,11 +34,12 @@ defmodule BlockScoutWeb.API.V2.TokenController do
       Logger.info "API token"
       Logger.info "Token #{inspect(token)}"
       base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
+      Logger.info "URL #{base_icon_url}}"
       %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(base_icon_url)
       if status_code == 200 do
-        Logger.info "Success?"
         Map.put(token, :icon_url, base_icon_url)
       end
+      Logger.info "Success? #{status_code}}"
       Logger.info "Token #{inspect(token)}"
       conn
       |> put_status(200)
