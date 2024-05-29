@@ -1,6 +1,9 @@
 defmodule BlockScoutWeb.API.V2.TokenController do
   use BlockScoutWeb, :controller
 
+  require Logger
+
+
   alias BlockScoutWeb.AccessHelper
   alias BlockScoutWeb.API.V2.TransactionView
   alias Explorer.Chain
@@ -30,6 +33,8 @@ defmodule BlockScoutWeb.API.V2.TokenController do
       TokenTotalSupplyOnDemand.trigger_fetch(address_hash)
       end
 
+    Logger.info  "Token API 1"
+    Logger.info  "#{inspect(params)}"
     base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
     %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(base_icon_url)
     if status_code == 200 do
