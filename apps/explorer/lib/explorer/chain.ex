@@ -5856,7 +5856,12 @@ defmodule Explorer.Chain do
       try_url
     else
       try_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
-      try_url
+      %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(try_url)
+      if status_code == 200 do
+        try_url
+      else
+        "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/default/token_icon_default.svg"
+      end
     end
   end
 
