@@ -4553,18 +4553,17 @@ defmodule Explorer.Chain do
         select: t
       )
 
-
-
     query
     |> join_associations(necessity_by_association)
     |> preload(:contract_address)
     |> select_repo(options).one()
     |> case do
-      nil ->
-        {:error, :not_found}
+         nil ->
+           {:error, :not_found}
 
-      %Token{} = token ->
-        {:ok, token}
+         %Token{} = token ->
+           {:ok, token}
+       end
   end
 
   @spec token_from_address_hash_exists?(Hash.Address.t(), [api?]) :: boolean()
