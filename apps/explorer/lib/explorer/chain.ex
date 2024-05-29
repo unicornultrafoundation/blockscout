@@ -4553,7 +4553,7 @@ defmodule Explorer.Chain do
         select: t
       )
 
-    base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{hash}/logo.png"
+
 
     query
     |> join_associations(necessity_by_association)
@@ -4564,16 +4564,7 @@ defmodule Explorer.Chain do
         {:error, :not_found}
 
       %Token{} = token ->
-        token
-        |> Map.fetch(:icon_url)
-        |> case do
-             nil ->
-               Map.put(:icon_url, base_icon_url)
-             {:ok, nil} ->
-               token = %{token | icon_url: base_icon_url}
-           end
         {:ok, token}
-      end
   end
 
   @spec token_from_address_hash_exists?(Hash.Address.t(), [api?]) :: boolean()
