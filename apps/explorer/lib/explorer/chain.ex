@@ -4564,7 +4564,7 @@ defmodule Explorer.Chain do
       %Token{} = token ->
         {:ok, token}
       end
-    base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
+    base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{hash}/logo.png"
 
     token
     |> Map.fetch(:icon_url)
