@@ -35,11 +35,16 @@ defmodule BlockScoutWeb.API.V2.TokenController do
       base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{Address.checksum(address_hash)}/logo.png"
       %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(base_icon_url)
       if status_code == 200 do
-        token = Map.put(token, :icon_url, base_icon_url)
+        token_with_icon = Map.put(token, :icon_url, base_icon_url)
+        conn
+        |> put_status(200)
+        |> render(:token, %{token: token_with_icon})
+      else
+        conn
+        |> put_status(200)
+        |> render(:token, %{token: token})
       end
-      conn
-      |> put_status(200)
-      |> render(:token, %{token: token})
+
     end
   end
 
