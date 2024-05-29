@@ -31,17 +31,13 @@ defmodule BlockScoutWeb.API.V2.TokenController do
          {:ok, false} <- AccessHelper.restricted_access?(address_hash_string, params),
          {:not_found, {:ok, token}} <- {:not_found, Chain.token_from_address_hash(address_hash, @api_true)} do
       TokenTotalSupplyOnDemand.trigger_fetch(address_hash)
+      Logger.info "API token"
+      Logger.info "Token #{inspect(token)}"
+      base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{hash}/logo.png"
+      %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(base_icon_url)
+      if status_code == 200 do
+        token = Map.put(token, :icon_url, base_icon_url)
       end
-
-    Logger.info  "Token API 1"
-    Logger.info  "Token info #{inspect(token)}"
-    base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
-    %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(base_icon_url)
-    if status_code == 200 do
-      token
-      |> Map.put(:icon_url, base_icon_url)
-      token
-
       conn
       |> put_status(200)
       |> render(:token, %{token: token})
