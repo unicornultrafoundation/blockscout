@@ -4568,7 +4568,7 @@ defmodule Explorer.Chain do
         |> Map.fetch(:icon_url)
         |> case do
              nil ->
-               Map.put(token, icon_url, base_icon_url)
+               Map.put(:icon_url, base_icon_url)
              {:ok, nil} ->
                token = %{token | icon_url: base_icon_url}
              {:ok, null} ->
