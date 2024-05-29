@@ -4564,6 +4564,16 @@ defmodule Explorer.Chain do
       %Token{} = token ->
         {:ok, token}
     end
+    base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{address_hash}/logo.png"
+
+    token
+    |> Map.fetch(:icon_url)
+    |> case do
+         nil ->
+           Map.put(token, icon_url, base_icon_url)
+         {:ok, nil} ->
+           token = %{token | icon_url: base_icon_url}
+    token
   end
 
   @spec token_from_address_hash_exists?(Hash.Address.t(), [api?]) :: boolean()
