@@ -4571,8 +4571,6 @@ defmodule Explorer.Chain do
                Map.put(:icon_url, base_icon_url)
              {:ok, nil} ->
                token = %{token | icon_url: base_icon_url}
-             {:ok, null} ->
-               token = %{token | icon_url: base_icon_url}
            end
         {:ok, token}
       end
