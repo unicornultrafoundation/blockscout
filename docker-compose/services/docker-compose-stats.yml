@@ -13,7 +13,7 @@ services:
     ports:
       - 7433:5432
     volumes:
-      - ./stats-db-data:/var/lib/postgresql/data/
+      - /data/blockscout/stats-db-data:/var/lib/postgresql/data/
 
   stats:
     image: ghcr.io/blockscout/stats:${STATS_DOCKER_TAG:-latest}

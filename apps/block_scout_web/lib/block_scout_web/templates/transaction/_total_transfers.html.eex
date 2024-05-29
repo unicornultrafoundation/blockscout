@@ -1,4 +1,6 @@
 <%= case token_transfer_amount(@transfer) do %>
+    <% {:ok, :erc404_instance} -> %>
+        <%= render BlockScoutWeb.TransactionView, "_transfer_token_with_id.html", transfer: @transfer, token_id: List.first(@transfer.token_ids) %>
     <% {:ok, :erc721_instance} -> %>
         <%= render BlockScoutWeb.TransactionView, "_transfer_token_with_id.html", transfer: @transfer, token_id: List.first(@transfer.token_ids) %>
     <% {:ok, :erc1155_instance, value} -> %>

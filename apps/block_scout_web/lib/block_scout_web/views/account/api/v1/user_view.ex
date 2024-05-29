@@ -12,6 +12,17 @@ defmodule BlockScoutWeb.Account.Api.V1.UserView do
     %{"name" => identity.name, "email" => identity.email, "avatar" => identity.avatar, "nickname" => identity.nickname}
   end
 
+  def render("watchlist_addresses.json", %{
+        watchlist_addresses: watchlist_addresses,
+        exchange_rate: exchange_rate,
+        next_page_params: next_page_params
+      }) do
+    %{
+      "items" => Enum.map(watchlist_addresses, &prepare_watchlist_address(&1, exchange_rate)),
+      "next_page_params" => next_page_params
+    }
+  end
+
   def render("watchlist_addresses.json", %{watchlist_addresses: watchlist_addresses, exchange_rate: exchange_rate}) do
     Enum.map(watchlist_addresses, &prepare_watchlist_address(&1, exchange_rate))
   end
@@ -20,12 +31,20 @@ defmodule BlockScoutWeb.Account.Api.V1.UserView do
     prepare_watchlist_address(watchlist_address, exchange_rate)
   end
 
+  def render("address_tags.json", %{address_tags: address_tags, next_page_params: next_page_params}) do
+    %{"items" => Enum.map(address_tags, &prepare_address_tag/1), "next_page_params" => next_page_params}
+  end
+
   def render("address_tags.json", %{address_tags: address_tags}) do
     Enum.map(address_tags, &prepare_address_tag/1)
   end
 
   def render("address_tag.json", %{address_tag: address_tag}) do
     prepare_address_tag(address_tag)
+  end
+
+  def render("transaction_tags.json", %{transaction_tags: transaction_tags, next_page_params: next_page_params}) do
+    %{"items" => Enum.map(transaction_tags, &prepare_transaction_tag/1), "next_page_params" => next_page_params}
   end
 
   def render("transaction_tags.json", %{transaction_tags: transaction_tags}) do
@@ -86,19 +105,22 @@ defmodule BlockScoutWeb.Account.Api.V1.UserView do
           "incoming" => watchlist.watch_coin_input,
           "outcoming" => watchlist.watch_coin_output
         },
-        "URC-20" => %{
+        "ERC-20" => %{
           "incoming" => watchlist.watch_erc_20_input,
           "outcoming" => watchlist.watch_erc_20_output
         },
-        "URC-721" => %{
+        "ERC-721" => %{
           "incoming" => watchlist.watch_erc_721_input,
           "outcoming" => watchlist.watch_erc_721_output
-        }
-        # ,
-        # "URC-1155" => %{
+        },
+        # "ERC-1155" => %{
         #   "incoming" => watchlist.watch_erc_1155_input,
         #   "outcoming" => watchlist.watch_erc_1155_output
-        # }
+        # },
+        "ERC-404" => %{
+          "incoming" => watchlist.watch_erc_404_input,
+          "outcoming" => watchlist.watch_erc_404_output
+        }
       },
       "notification_methods" => %{
         "email" => watchlist.notify_email

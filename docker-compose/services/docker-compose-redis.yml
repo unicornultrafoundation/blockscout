@@ -8,4 +8,5 @@ services:
     container_name: redis_db
     command: redis-server
     volumes:
-      - ./redis-data:/data
+      - /data/blockscout/redis-data:/data
+    restart: always

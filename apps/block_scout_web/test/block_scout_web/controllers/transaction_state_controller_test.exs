@@ -7,7 +7,7 @@ defmodule BlockScoutWeb.TransactionStateControllerTest do
   import BlockScoutWeb.WeiHelper, only: [format_wei_value: 2]
   import EthereumJSONRPC, only: [integer_to_quantity: 1]
   alias Explorer.Chain.Wei
-  alias Indexer.Fetcher.CoinBalance
+  alias Indexer.Fetcher.CoinBalance.Catchup, as: CoinBalanceCatchup
   alias Explorer.Counters.{AddressesCounter, AverageBlockTime}
   alias Indexer.Fetcher.CoinBalanceOnDemand
 
@@ -114,7 +114,7 @@ defmodule BlockScoutWeb.TransactionStateControllerTest do
       block = insert(:block)
       address_a = insert(:address)
       address_b = insert(:address)
-      token = insert(:token, type: "URC-20")
+      token = insert(:token, type: "ERC-20")
 
       insert(:fetched_balance,
         address_hash: address_a.hash,
@@ -182,7 +182,7 @@ defmodule BlockScoutWeb.TransactionStateControllerTest do
 
     test "fetch coin balances if needed", %{conn: conn} do
       json_rpc_named_arguments = Application.fetch_env!(:indexer, :json_rpc_named_arguments)
-      CoinBalance.Supervisor.Case.start_supervised!(json_rpc_named_arguments: json_rpc_named_arguments)
+      CoinBalanceCatchup.Supervisor.Case.start_supervised!(json_rpc_named_arguments: json_rpc_named_arguments)
 
       EthereumJSONRPC.Mox
       |> stub(:json_rpc, fn
