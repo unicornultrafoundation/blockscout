@@ -4572,6 +4572,8 @@ defmodule Explorer.Chain do
                    token_with_icon = Map.put(token, :icon_url, base_icon_url)
                    Chain.update_token(token, %{icon_url: base_icon_url})
                    {:ok, token_with_icon}
+                 _ ->
+                   {:ok, token}
                  end
 
                _ ->
