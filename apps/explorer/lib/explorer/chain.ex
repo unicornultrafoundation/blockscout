@@ -4564,20 +4564,19 @@ defmodule Explorer.Chain do
          %Token{} = token ->
            # Handle default icon url
            Logger.info "Token instance: #{inspect(token)}"
+           case Map.fetch(token, :icon_url) do
+             {:ok, nil} ->
+               base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{Address.checksum(hash)}/logo.png"
+               case HTTPoison.get!(base_icon_url) do
+                 %HTTPoison.Response{status_code: 200} ->
+                   token_with_icon = Map.put(token, :icon_url, base_icon_url)
+                   Chain.update_token(token, %{icon_url: base_icon_url})
+                   {:ok, token_with_icon}
+                 end
 
-           base_icon_url = "https://raw.githubusercontent.com/unicornultrafoundation/token-assets/master/tokens/#{Address.checksum(hash)}/logo.png"
-           Logger.info "Base Icon URL: #{base_icon_url}"
-           %HTTPoison.Response{status_code: status_code} = HTTPoison.get!(base_icon_url)
-           if status_code == 200 do
-             token_with_icon = Map.put(token, :icon_url, base_icon_url)
-
-             Chain.update_token(token, %{icon_url: base_icon_url})
-
-             {:ok, token_with_icon}
-           else
-             {:ok, token}
+               _ ->
+               {:ok, token}
            end
-
        end
   end
 
