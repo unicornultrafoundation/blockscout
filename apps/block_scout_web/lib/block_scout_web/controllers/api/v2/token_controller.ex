@@ -1,7 +1,7 @@
 defmodule BlockScoutWeb.API.V2.TokenController do
   use BlockScoutWeb, :controller
 
-  require Logger
+
 
 
   alias BlockScoutWeb.AccessHelper
