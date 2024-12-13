@@ -8,6 +8,8 @@ defmodule Explorer.ExchangeRates.Source.CoinMarketCap do
 
   import Source, only: [to_decimal: 1]
 
+  require Logger
+
   @behaviour Source
 
   @impl Source
@@ -57,6 +59,12 @@ defmodule Explorer.ExchangeRates.Source.CoinMarketCap do
     symbol = if coin, do: String.upcase(Explorer.coin()), else: nil
     coin_id = coin_id()
 
+    Logger.info(
+      "Get market cap with",
+      coin: coin,
+      coin_id: coin_id,
+      url: "#{api_quotes_latest_url()}?id=#{coin_id}&CMC_PRO_API_KEY=#{api_key()}"
+    )
     cond do
       coin_id ->
         "#{api_quotes_latest_url()}?id=#{coin_id}&CMC_PRO_API_KEY=#{api_key()}"
