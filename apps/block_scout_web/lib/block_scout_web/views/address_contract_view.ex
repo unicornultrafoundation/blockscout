@@ -1,9 +1,16 @@
 defmodule BlockScoutWeb.AddressContractView do
   use BlockScoutWeb, :view
 
-  alias ABI.{FunctionSelector, TypeDecoder}
+  require Logger
+
+  import Explorer.Helper, only: [decode_data: 2]
+
+  alias ABI.FunctionSelector
   alias Explorer.Chain
   alias Explorer.Chain.{Address, Data, InternalTransaction, Transaction}
+  alias Explorer.Chain.SmartContract
+  alias Explorer.Chain.SmartContract.Proxy.EIP1167
+  alias Explorer.SmartContract.Helper, as: SmartContractHelper
 
   def render("scripts.html", %{conn: conn}) do
     render_scripts(conn, "address_contract/code_highlighting.js")
@@ -90,16 +97,6 @@ defmodule BlockScoutWeb.AddressContractView do
     end
   end
 
-  def decode_data("0x" <> encoded_data, types) do
-    decode_data(encoded_data, types)
-  end
-
-  def decode_data(encoded_data, types) do
-    encoded_data
-    |> Base.decode16!(case: :mixed)
-    |> TypeDecoder.decode_raw(types)
-  end
-
   def format_external_libraries(libraries, conn) do
     Enum.reduce(libraries, "", fn %{name: name, address_hash: address_hash}, acc ->
       address = get_address(address_hash)
@@ -121,12 +118,12 @@ defmodule BlockScoutWeb.AddressContractView do
     {:ok, contract_code}
   end
 
-  def creation_code(%Address{contracts_creation_internal_transaction: %InternalTransaction{}} = address) do
-    address.contracts_creation_internal_transaction.init
-  end
-
   def creation_code(%Address{contracts_creation_transaction: %Transaction{}} = address) do
     address.contracts_creation_transaction.input
+  end
+
+  def creation_code(%Address{contracts_creation_internal_transaction: %InternalTransaction{}} = address) do
+    address.contracts_creation_internal_transaction.init
   end
 
   def creation_code(%Address{contracts_creation_transaction: nil}) do
@@ -138,6 +135,12 @@ defmodule BlockScoutWeb.AddressContractView do
     chain_id = Application.get_env(:explorer, Explorer.ThirdPartyIntegrations.Sourcify)[:chain_id]
     repo_url = Application.get_env(:explorer, Explorer.ThirdPartyIntegrations.Sourcify)[:repo_url]
     match = if partial_match, do: "/partial_match/", else: "/full_match/"
-    repo_url <> match <> chain_id <> "/" <> checksummed_hash <> "/"
+
+    if chain_id do
+      repo_url <> match <> chain_id <> "/" <> checksummed_hash <> "/"
+    else
+      Logger.warning("chain_id is nil. Please set CHAIN_ID env variable.")
+      nil
+    end
   end
 end

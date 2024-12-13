@@ -89,6 +89,13 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
       value_5 = Decimal.new(2)
       token_id_5 = Decimal.new(555)
 
+      token_erc_404 = insert(:token, holder_count: 0)
+      token_erc_404_contract_address_hash = token_erc_404.contract_address_hash
+      value_6 = Decimal.new(10)
+      token_id_6 = Decimal.new(333)
+
+      value_7 = Decimal.new(25)
+
       block_number = 1
 
       assert {:ok,
@@ -121,6 +128,20 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                     token_contract_address_hash: ^token_erc_721_contract_address_hash,
                     value: ^value_5,
                     token_id: nil
+                  },
+                  %Explorer.Chain.Address.CurrentTokenBalance{
+                    address_hash: ^address_hash,
+                    block_number: ^block_number,
+                    token_contract_address_hash: ^token_erc_404_contract_address_hash,
+                    value: ^value_7,
+                    token_id: nil
+                  },
+                  %Explorer.Chain.Address.CurrentTokenBalance{
+                    address_hash: ^address_hash,
+                    block_number: ^block_number,
+                    token_contract_address_hash: ^token_erc_404_contract_address_hash,
+                    value: ^value_6,
+                    token_id: ^token_id_6
                   }
                 ],
                 address_current_token_balances_update_token_holder_counts: [
@@ -135,6 +156,10 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                   %{
                     contract_address_hash: ^token_erc_721_contract_address_hash,
                     holder_count: 1
+                  },
+                  %{
+                    contract_address_hash: ^token_erc_404_contract_address_hash,
+                    holder_count: 2
                   }
                 ]
               }} =
@@ -147,7 +172,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_1,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_1,
-                     token_type: "URC-1155"
+                     token_type: "ERC-1155"
                    },
                    %{
                      address_hash: address_hash,
@@ -156,7 +181,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_2,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_2,
-                     token_type: "URC-1155"
+                     token_type: "ERC-1155"
                    },
                    %{
                      address_hash: address_hash,
@@ -165,7 +190,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_3,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_3,
-                     token_type: "URC-20"
+                     token_type: "ERC-20"
                    },
                    %{
                      address_hash: address_hash,
@@ -174,7 +199,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_4,
                      value_fetched_at: DateTime.add(DateTime.utc_now(), -1),
                      token_id: token_id_4,
-                     token_type: "URC-721"
+                     token_type: "ERC-721"
                    },
                    %{
                      address_hash: address_hash,
@@ -183,7 +208,25 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
                      value: value_5,
                      value_fetched_at: DateTime.utc_now(),
                      token_id: token_id_5,
-                     token_type: "URC-721"
+                     token_type: "ERC-721"
+                   },
+                   %{
+                     address_hash: address_hash,
+                     block_number: block_number,
+                     token_contract_address_hash: token_erc_404_contract_address_hash,
+                     value: value_6,
+                     value_fetched_at: DateTime.utc_now(),
+                     token_id: token_id_6,
+                     token_type: "ERC-404"
+                   },
+                   %{
+                     address_hash: address_hash,
+                     block_number: block_number,
+                     token_contract_address_hash: token_erc_404_contract_address_hash,
+                     value: value_7,
+                     value_fetched_at: DateTime.utc_now(),
+                     token_id: nil,
+                     token_type: "ERC-404"
                    }
                  ],
                  options
@@ -197,7 +240,7 @@ defmodule Explorer.Chain.Import.Runner.Address.CurrentTokenBalancesTest do
         current_token_balances
         |> Enum.count()
 
-      assert current_token_balances_count == 4
+      assert current_token_balances_count == 6
     end
 
     test "updates when the new block number is greater", %{

@@ -1,8 +1,7 @@
 defmodule Explorer.Chain.Import.Stage.BlockReferencing do
   @moduledoc """
   Imports any tables that reference `t:Explorer.Chain.Block.t/0` and that were
-  imported by `Explorer.Chain.Import.Stage.Addresses` and
-  `Explorer.Chain.Import.Stage.AddressReferencing`.
+  imported by `Explorer.Chain.Import.Stage.BlockRelated`.
   """
 
   alias Explorer.Chain.Import.{Runner, Stage}
@@ -10,17 +9,21 @@ defmodule Explorer.Chain.Import.Stage.BlockReferencing do
   @behaviour Stage
 
   @impl Stage
-  def runners,
-    do: [
-      Runner.Transactions,
+  def runners do
+    [
       Runner.Transaction.Forks,
       Runner.Logs,
       Runner.Tokens,
-      Runner.TokenTransfers,
-      Runner.Address.TokenBalances,
+      Runner.TokenInstances,
       Runner.TransactionActions,
-      Runner.Withdrawals
+      Runner.Withdrawals,
+      Runner.SignedAuthorizations
     ]
+  end
+
+  @impl Stage
+  def all_runners,
+    do: runners()
 
   @impl Stage
   def multis(runner_to_changes_list, options) do
